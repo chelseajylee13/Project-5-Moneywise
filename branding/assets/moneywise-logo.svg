@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" role="img" aria-labelledby="title description">
+  <title id="title">Moneywise logo</title>
+  <desc id="description">A lowercase Moneywise wordmark beside a circular symbol made from four rounded geometric fields representing the four financial personality dimensions.</desc>
+
+  <!-- Four-part coin/compass symbol -->
+  <g transform="translate(12 12)">
+    <circle cx="68" cy="68" r="58" fill="#F5F1E8" stroke="#262A27" stroke-width="4"/>
+
+    <path d="M39 62V45C39 34.5 47.5 26 58 26H75V47C75 55.3 68.3 62 60 62H39Z" fill="#93A88F"/>
+    <path d="M81 26H98C108.5 26 117 34.5 117 45V62H96C87.7 62 81 55.3 81 47V26Z" fill="#B7A8C8"/>
+    <path d="M81 74H102C110.3 74 117 80.7 117 89V91C117 101.5 108.5 110 98 110H81V74Z" fill="#758D73"/>
+    <path d="M39 74H60C68.3 74 75 80.7 75 89V110H58C47.5 110 39 101.5 39 91V74Z" fill="#9C8DAF"/>
+
+    <rect x="62" y="62" width="12" height="12" rx="3" transform="rotate(45 68 68)" fill="#262A27"/>
+  </g>
+
+  <!-- Lowercase editorial wordmark -->
+  <text
+    x="162"
+    y="103"
+    fill="#262A27"
+    font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+    font-size="72"
+    font-weight="600"
+    letter-spacing="-3"
+  >moneywise</text>
+</svg>

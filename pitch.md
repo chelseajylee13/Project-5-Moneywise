@@ -20,13 +20,23 @@ When you begin this step, start a fresh chat so its transcript stays clean. For 
 
 For each idea worth considering, note what it is, what appeals to you, who it's for, and the main feasibility concerns.
 
+Three related directions were considered:
+
+1. **Personality assessment only.** A short experience that helps young people reflect on how they approach spending, decisions, planning, and financial uncertainty. Its appeal is a focused, highly polished interaction. Its main concern is limited educational depth after the result.
+2. **Financial learning platform only.** A small collection of approachable, interactive lessons for young adults. Its appeal is practical value. Its main concerns are the research and writing workload and a less distinctive entry point.
+3. **Personality-guided learning platform.** A transparent self-reflection assessment leads into relevant lessons while a complete Academy remains open to everyone. This combines a distinctive personal entry point with practical education. Its feasibility depends on limiting the initial Academy to three lessons and reusing one lesson structure.
+
 ### Choice
 
 Which idea you chose, why, and what you set aside.
 
+The Developer chose the combined personality-guided learning platform. It best supports the core idea: help young people notice how they think about money, then teach concepts they may need as they become more independent. The core launch experience includes 16 money personality types generated from four binary dimensions. It sets aside a large lesson library, accounts, live financial data, and runtime generative AI.
+
 ### Branding
 
 For your chosen idea, explore a few possible titles, logos, and visual branding directions, such as color, type, and tone. Keep it simple.
+
+The working title is **Moneywise**. The approved direction is modern, editorial, minimal, sophisticated, youthful, and approachable: large sans-serif headlines, generous white space, warm off-white, deep charcoal, muted sage, soft lavender, clean cards, restrained geometric illustrations, and subtle motion. The current logo is **Provisional — Subject to Refinement**. It combines a lowercase Moneywise wordmark with a four-part geometric coin or compass mark representing the four assessment dimensions and the movement from reflection to learning. The Developer intends to redesign or refine it in a later phase.
 
 ## Pitch
 
@@ -36,46 +46,110 @@ Keep this section to about 1,000 words.
 
 What it is, in a few sentences.
 
+Moneywise is an interactive financial-literacy web application for teenagers and young adults ages 16–25. Users complete a 16-question self-reflection assessment and receive one of 16 money personality types. Each four-letter code records how their responses leaned across security or experience, analytical or intuitive decisions, planned or flexible behavior, and cautious or exploratory choices. Transparent rules then suggest relevant lessons in Moneywise Academy, where users learn through concise explanations, fictional examples, interactive activities, and reflection.
+
+It is an educational experience, not a validated psychological assessment or personalized financial advice. Every lesson remains available regardless of result, and the application requests no sensitive financial data.
+
 ### Title and branding
 
 Your working title, logo, and a short description of the visual branding. These may change during development; keep the current branding with the visual rules in `spec.md`.
+
+The working title is **Moneywise**. Its current logo, saved at `branding/assets/moneywise-logo.svg`, is **Provisional — Subject to Refinement**: a lowercase wordmark paired with a four-part geometric coin or compass symbol. The visual identity uses editorial scale, modern sans-serif typography, warm neutral space, charcoal text, muted sage and lavender accents, geometric illustration, clear data visualization, and subtle microinteractions. It should feel like a thoughtful contemporary product rather than a banking dashboard, textbook, or childish learning game.
 
 ### Why this project
 
 Why you chose it and what makes it worth five weeks.
 
+Many young people encounter paychecks, credit, workplace benefits, saving, and investing concepts before they feel prepared to evaluate them. Moneywise creates an inviting entry point by connecting self-reflection with practical learning without claiming personality determines financial success.
+
+The five-week challenge combines original branding, interaction design, deterministic scoring, rule-based personalization, researched education, simulations, accessibility, and public deployment.
+
 ### Users
 
 Who it's for and what they need from it.
+
+The primary Users are ages 16–25 with little or no financial knowledge. Moneywise does not assume a job, regular income, workplace plan, or money to invest. Users need judgment-free explanations, visible trade-offs, transparent results, accessible interactions, and freedom to explore.
 
 ### Experience goals
 
 What Users should notice, feel, and be able to do.
 
+Users should notice a clear, original, editorial visual identity and feel curious rather than tested or judged. They should be able to:
+
+- complete a 16-question assessment and revise answers;
+- use `Not sure yet` when a non-anchor scenario does not fit and understand what each qualitative trait result means;
+- recognize strengths and blind spots without ranking types;
+- understand why lessons were suggested;
+- browse the full Academy independently;
+- learn through **Understand → See an Example → Interact → Reflect**; and
+- change fictional inputs, understand trade-offs, and restart or replay.
+
 ### Technical goals
 
 What the system must do and the technical challenges you intend to take on.
+
+The system must distinguish directional, `Not sure yet`, and missing answers; deterministically classify four response dimensions into all 16 possible letter codes; and render 16 data-driven personality records through one shared result structure. It must present qualitative response tendencies without percentages, connect actual scores and response patterns to neutral lesson suggestions, keep sourced content separate from interface components, and run three lessons without a backend: **Your First Paycheck & Employer Match**, **Retirement Accounts Explained**, and **The Power of Compound Growth**.
+
+Calculations expose assumptions and never present hypothetical growth as guaranteed. The responsive interface supports keyboard navigation, reduced motion, chart text alternatives, hash-based browser navigation, and GitHub Pages deployment.
 
 ### Starting point
 
 From scratch, extending one of your previous projects, or building on an open-source project. For open source, name the project and confirm its license permits your use. If you extend existing code, commit the original before your changes so your work is clearly distinguishable.
 
+Moneywise will be built from scratch in the provided Project 5 repository. The course template was preserved in the initial commit before application development. No open-source application is being extended. External libraries, factual sources, and assets will be recorded with their licenses or usage terms in `research.md`.
+
 ### Tech stack
 
 The technologies you plan to use and why, including any you are new to.
+
+- **React** for reusable assessment, result, and lesson interfaces.
+- **TypeScript** for explicit, testable content and logic.
+- **Vite** for a small, fast development and production build setup.
+- **CSS** with shared tokens for a cohesive responsive system.
+- **Hash-based routing** for Academy pages and GitHub Pages compatibility.
+- **Local storage, if testing supports it**, for optional non-sensitive progress.
+- **GitHub Pages** for public deployment.
+
+No backend, authentication, paid API, live financial account connection, or runtime generative AI is planned.
 
 ### MVP or critical function
 
 The smallest version that genuinely works end to end, or the riskiest function you will validate first, and how you will know it works.
 
+Phase 2 will prove one complete journey:
+
+**Landing → 16-question assessment → trait analysis and personality type → explained recommendation → First Paycheck & Employer Match lesson → reflection**
+
+The proof succeeds when all 16 codes are reachable through documented tests, balanced and tied dimensions classify by the approved rule, recommendation triggers are explained, fictional paycheck inputs update correctly, and the journey works by keyboard at mobile and desktop sizes. The other lessons and persistent progress are not required yet.
+
 ### Five-week map
 
 What each phase should produce, ending in a project that is publicly usable online or in person.
+
+1. **Phase 1 — Ideate and pitch:** Approve the concept, three-lesson scope, ethical boundaries, brand direction, architecture, critical proof, and risks.
+2. **Phase 2 — Prove the core:** Finalize and test the 16-type scoring and recommendation rules, then build the complete MVP journey through the First Paycheck lesson using one shared result template.
+3. **Phase 3 — Expand and revise:** Respond to the milestone review, implement Retirement Accounts Explained and Compound Growth, and establish the shared visual system.
+4. **Phase 4 — Integrate and test:** Complete responsive behavior, accessibility, source review, progress/reflection behavior, deployment, and peer-review-ready polish.
+5. **Phase 5 — Finish and showcase:** Respond to peer review, fix priority issues, simplify accumulated code, verify the public build, and complete the breakdown and debrief.
 
 ### Stretch goals
 
 Additional features in priority order, so running short on time removes the least important work first.
 
+1. Budgeting and emergency-savings lessons.
+2. Credit cards, credit scores, and debt lesson.
+3. Investing risk and diversification lesson.
+4. Optional saved lesson progress and return-to-session behavior.
+5. Additional scenario variants, illustrations, and motion polish.
+6. Additional assessment questions, result variations, or family-specific visual treatments beyond the shared launch structure.
+
 ### Risks
 
 What could block or derail the project, and how you will find out early.
+
+- **Scoring credibility:** Question wording and qualitative balance bands remain provisional design conventions. Phase 2 begins by usability-testing them and proving that all 16 codes, neutral-response cases, and tie paths are reachable.
+- **Financial accuracy:** Tax and retirement rules change, and employer plans vary. Lessons will use authoritative sources, dated reviews, fictional assumptions, and no unnecessary annual limits.
+- **Misleading results or simulations:** Language will describe response patterns, state limits, label projections as hypothetical, and separate contributions from growth.
+- **Scope:** Sixteen unique records add writing and testing work. One shared results structure and one reusable lesson structure will be proven before visual expansion.
+- **Accessibility:** Each checkpoint includes keyboard, nonvisual, contrast, focus, responsive, and reduced-motion checks.
+- **Brand distinctiveness:** The working name and provisional mark require review before launch.
