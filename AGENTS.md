@@ -44,4 +44,11 @@ When the Developer directs the Agent to save a transcript, save the entire text 
 
 # Project
 
-Fill in as the project takes shape: how to run it locally, how to test it, and any commands or structure that aren't obvious from the code.
+Moneywise is a static React, TypeScript, and Vite application.
+
+- Install dependencies: `npm.cmd install`
+- Start local development: `npm.cmd run dev`
+- Run automated tests: `npm.cmd test`
+- Create a production build: `npm.cmd run build`
+
+Application code lives in `src/`. Route configuration belongs in `src/app/`, reusable interface pieces in `src/components/`, route-level views in `src/screens/`, shared styling in `src/styles/`, and test setup in `src/test/`. Add scoring, financial calculations, and structured content only in the domain and content layers described by `spec.md`; do not place those rules in React components.

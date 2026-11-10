@@ -20,9 +20,9 @@ What Users should be able to do and experience in the current version, tied to t
 
 **Status:** Requirements below are Developer-approved unless marked **Provisional** or **Outstanding**.
 
-Moneywise should help Users ages 16–25 reflect on how their assessment answers relate to four money-behavior dimensions, then move into practical financial education without judgment. The intended journey is:
+Moneywise should help young adults ages 18–25, especially college students, recent graduates, and people beginning financial independence, reflect on how their assessment answers relate to four money-behavior dimensions, then move into practical financial education without judgment. The intended journey is:
 
-**Landing → Discover → Analyze → Learn → Apply → Reflect**
+**Landing → 16-question assessment → Personality Results → Personalized Learning Recommendations → Academy → First Paycheck lesson → Reflection**
 
 Users may instead enter Moneywise Academy directly. The assessment personalizes suggested starting points but never restricts lesson access. The experience must not assume employment, income, access to benefits, prior knowledge, or investable money.
 
@@ -40,7 +40,7 @@ For each feature or behavior you are building, describe what it should do and wh
 - On an unknown route, show a useful recovery path rather than a blank screen.
 - Provide a visible keyboard focus state and logical heading and landmark structure.
 
-### Assessment — Approved contract; wording provisional
+### Assessment — Approved contract; working wording implemented
 
 - Present exactly 16 questions covering four dimensions, with four questions per dimension.
 - Require one valid response per question before calculating a result; never silently substitute an answer.
@@ -49,13 +49,14 @@ For each feature or behavior you are building, describe what it should do and wh
 - Support keyboard and touch input without relying on drag gestures.
 - Explain before submission that the activity is an original educational self-reflection framework, not a validated psychological test.
 - Explain that Users do not need a job, financial account, or previous financial experience and may answer hypothetical situations based on what feels most natural.
-- For the 12 non-anchor questions, show Strongly disagree, Somewhat disagree, Not sure yet, Somewhat agree, and Strongly agree. `Not sure yet` is a valid answered state scored `0`; it is not equivalent to missing data.
-- For the four anchor questions, use the forced-choice four-point agreement scale without `Not sure yet` so an exact tie always has a deterministic direction.
+- Use eight agreement questions and eight situational multiple-choice questions, with two of each format per dimension.
+- Agreement questions use Strongly disagree, Somewhat disagree, Not sure yet, Somewhat agree, and Strongly agree. `Not sure yet` is a valid answered state scored `0`; it is not equivalent to missing data.
+- Four non-anchor scenarios use four direct directional choices plus `Not sure yet` scored `0`. Four anchor scenarios use only `-2`, `-1`, `+1`, and `+2` choices so an exact tie always has a deterministic direction.
 - A missing response has no score and blocks submission until answered. Do not silently convert it to `0`.
 - Avoid language suggesting a correct or financially superior response. The internal anchor and reverse-score metadata must never be presented as a signal that one question is more important.
-- **Provisional:** Final ordering and the approved working wording below require small-scale usability testing before being treated as stable content.
+- **Approved for Phase 2 implementation:** The working wording, interleaved ordering, and scoring metadata below are implemented. Small-scale usability testing is still required before treating the wording as final content.
 
-### Personality dimensions and scoring — Approved contract; provisional interpretation bands
+### Personality dimensions and scoring — Approved contract and interpretation bands
 
 The four axes are:
 
@@ -64,7 +65,7 @@ The four axes are:
 3. Planned (P) ↔ Flexible (F)
 4. Cautious (C) ↔ Exploratory (O)
 
-For every axis, the first listed pole is negative and the second is positive. An ordinary second-pole item maps Strongly disagree, Somewhat disagree, Not sure yet, Somewhat agree, and Strongly agree to `-2`, `-1`, `0`, `+1`, and `+2`. A first-pole item is explicitly marked `reverse: true`, multiplying that response value by `-1`. Four keyed values are summed, giving an integer raw total from `-8` to `+8`. Anchor items never receive `0`.
+For every axis, the first listed pole is negative and the second is positive. A standard second-pole agreement item maps Strongly disagree, Somewhat disagree, Not sure yet, Somewhat agree, and Strongly agree to `-2`, `-1`, `0`, `+1`, and `+2`. A first-pole agreement item is explicitly marked `reverse: true`, multiplying that response value by `-1`. Scenario choices contain their direct signed contribution and are not reversed. Four values are summed, giving an integer raw total from `-8` to `+8`. Anchor items never receive `0`.
 
 - Negative total → first letter: S, A, P, or C.
 - Positive total → second letter: E, I, F, or O.
@@ -72,38 +73,40 @@ For every axis, the first listed pole is negative and the second is positive. An
 
 The anchor breaks classification ties only. A zero raw total must still display as balanced, and the question must not appear more authoritative in the interface. The result explanation states that a direct preference response supplied the code letter when the overall answers were evenly split. The same answers always produce the same four-letter code. Tests must demonstrate that all 16 codes are reachable.
 
-**Provisional interpretation bands:** absolute total `0` is balanced, `1–2` is nearly balanced, `3–5` is a moderate lean, and `6–8` is a stronger lean. Directional language describes response patterns, for example, “Your responses leaned toward analytical decision-making.” The interface states that preferences and habits may change.
+**Approved interpretation bands:** absolute total `0` is balanced, `1–2` is nearly balanced, `3–5` is a moderate lean, and `6–8` is a stronger lean. Directional language describes response patterns, for example, “Your responses leaned toward analytical decision-making.” The interface states that preferences and habits may change.
 
-The initial version does not display numerical percentages. Each dimension uses a clear visual position plus the primary qualitative labels balanced, nearly balanced, moderate lean, or stronger lean. Every visual has an equivalent text statement and does not imply probability, accuracy, fixed trait strength, scientific measurement, or prediction of financial outcomes. **Provisional:** If two or more non-anchor answers on one dimension are `Not sure yet`, its explanation notes that the result is based on fewer directional responses and does not use stronger certainty language.
+The initial version does not display numerical percentages. Each dimension uses a clear visual position plus the primary qualitative labels balanced, nearly balanced, moderate lean, or stronger lean. Every visual has an equivalent text statement and does not imply probability, accuracy, fixed trait strength, scientific measurement, or prediction of financial outcomes. If two or more non-anchor answers on one dimension are `Not sure yet`, its explanation notes that the result is based on fewer directional responses and does not use stronger certainty language.
 
-#### Proposed assessment questions — Provisional
+#### Assessment questions — Approved working content
 
 The IDs, axis, key direction, reverse-score status, and anchor status are internal. Question language is shown to Users; metadata is not.
 
-| ID | Dimension | Proposed statement | Keying | Anchor |
-| --- | --- | --- | --- | --- |
-| SE1 | S/E | If I received some money unexpectedly, I would be more likely to save it for future needs than spend it on something enjoyable now. | S; reverse | No |
-| SE2 | S/E | A meaningful experience can be worth saving a little less for a while. | E; standard | No |
-| SE3 | S/E | Before paying for a special event or trip, I would want money set aside in case something unexpected happened. | S; reverse | No |
-| SE4 | S/E | If both choices were reasonable, I would choose a memorable experience now over putting the same amount into savings. | E; standard | Yes |
-| AI1 | A/I | Before making a money decision, I prefer comparing the numbers and available options. | A; reverse | No |
-| AI2 | A/I | I can feel comfortable with a money choice before I can explain all the numbers behind it. | I; standard | No |
-| AI3 | A/I | Even for a purchase I care about, I would check the cost and alternatives before deciding. | A; reverse | No |
-| AI4 | A/I | When I do not have complete information, I would rather follow my instincts than keep analyzing. | I; standard | Yes |
-| PF1 | P/F | I like deciding in advance how I would use my money. | P; reverse | No |
-| PF2 | P/F | I prefer leaving room to change a spending or saving plan when circumstances change. | F; standard | No |
-| PF3 | P/F | If I received money, I would prefer assigning it to specific purposes instead of deciding as I go. | P; reverse | No |
-| PF4 | P/F | If circumstances changed, I would rather adapt freely than stay with my original money plan. | F; standard | Yes |
-| CO1 | C/O | When learning about money, I prefer starting with familiar options before considering unfamiliar ones. | C; reverse | No |
-| CO2 | C/O | I enjoy learning how an unfamiliar financial tool or account works. | O; standard | No |
-| CO3 | C/O | I would rather understand one financial option thoroughly than explore several unfamiliar possibilities at once. | C; reverse | No |
-| CO4 | C/O | After learning the basics, I would rather explore a new financial approach than stay with one I already know. | O; standard | Yes |
+| ID | Dimension | Format | Working prompt | Scoring | Anchor |
+| --- | --- | --- | --- | --- | --- |
+| SE1 | S/E | Agreement | Having money set aside usually feels more reassuring to me than spending it on something enjoyable right away. | S; reverse | No |
+| SE2 | S/E | Agreement | A meaningful experience can be worth saving a little less for a while. | E; standard | No |
+| SE3 | S/E | Scenario | An unexpected expense uses part of the money you had set aside for a weekend with friends. You can still afford to do something, but your cushion would be smaller. What feels most natural? | Direct | No |
+| SE4 | S/E | Scenario | You're on a trip with friends. The essentials are covered, and you have some extra money available. What feels most natural? | Direct | Yes |
+| AI1 | A/I | Agreement | Before making a money decision, I prefer comparing the numbers and available options. | A; reverse | No |
+| AI2 | A/I | Agreement | I can feel comfortable with a money choice before I can explain all the numbers behind it. | I; standard | No |
+| AI3 | A/I | Scenario | You're choosing between two phone plans. Both cover what you need, but their prices and features differ. How would you decide? | Direct | No |
+| AI4 | A/I | Scenario | You want to buy something you've considered for a while, but the reviews and trade-offs are mixed. What feels most natural? | Direct | Yes |
+| PF1 | P/F | Agreement | I like deciding in advance how I would use my money. | P; reverse | No |
+| PF2 | P/F | Agreement | I prefer leaving room to change a spending or saving plan when circumstances change. | F; standard | No |
+| PF3 | P/F | Scenario | Friends change the weekend plans at the last minute, and the new option costs a different amount. How would you respond? | Direct | No |
+| PF4 | P/F | Scenario | You receive some unexpected money with no immediate obligation attached. How would you handle it? | Direct | Yes |
+| CO1 | C/O | Agreement | When learning about money, I prefer starting with familiar options before considering unfamiliar ones. | C; reverse | No |
+| CO2 | C/O | Agreement | I enjoy learning how an unfamiliar financial tool or account works. | O; standard | No |
+| CO3 | C/O | Scenario | You hear about a financial account or tool you have not used before. What would you be most likely to do? | Direct | No |
+| CO4 | C/O | Scenario | A friend shows you a new way to organize money. Your current method works well enough. What feels most natural? | Direct | Yes |
 
-These questions are provisionally approved. Before implementation is considered content-complete, test their reading level, double meanings, social desirability, scenario variety, and whether `Not sure yet` is understood as uncertainty rather than a neutral preference. Each scenario remains hypothetical and answerable without employment or financial-product experience.
+Scenario choices are stored with their exact User-facing labels in `src/content/assessment/questions.ts`. Every scenario has four directional choices mapped in order to `-2`, `-1`, `+1`, and `+2`; SE3, AI3, PF3, and CO3 also provide `Not sure yet` as `0`. Scenario values are direct contributions and are never reverse-scored. Agreement Q1 items are reverse-scored; agreement Q2 items are standard.
 
-### Sixteen personality types and families — Provisional matrix
+These questions and their metadata are approved for the Phase 2 scoring implementation. Before the assessment is considered content-complete, test their reading level, double meanings, social desirability, scenario variety, and whether `Not sure yet` is understood as uncertainty rather than a neutral preference. Each scenario remains hypothetical and answerable without employment or financial-product experience.
 
-Families are provisionally determined by the first two letters. Their identities summarize orientation and decision style; the last two letters create meaningful variations in planning and exploration. The matrix is content for Developer review, not a validated taxonomy.
+### Sixteen personality types and families — Approved working matrix
+
+Families are determined by the first two letters. Their identities summarize orientation and decision style; the last two letters create meaningful variations in planning and exploration. The matrix is approved working content for Phase 2 and still requires later usability review; it is not a validated taxonomy.
 
 #### SA — Measured Builders
 
@@ -151,19 +154,31 @@ Experience-focused and intuitive. This family tends to value possibility, person
 
 The short learning suggestions above are possible starting points, not the final recommendation engine. Actual recommendations primarily use individual scores and response rules. All Users can access all lessons.
 
-### Results and recommendations — Approved
+### Personality Results — Approved
 
 - Show the four-letter code and personality name as an approachable summary, not a diagnosis or destiny.
-- Show all four response tendencies with qualitative labels and text equivalents for every visual.
-- Render all 16 records through one shared result-page structure containing description, strengths, possible blind spots, financial growth suggestions, response-score explanations, and learning recommendations.
+- Show the personality family, a meaningful description of financial tendencies, financial strengths, and possible blind spots.
+- Show all four response tendencies as bipolar horizontal scales whose marker positions are derived from the actual dimension totals. Pair every scale with a qualitative label and equivalent text explanation.
+- Use qualitative labels such as balanced, nearly balanced, moderate lean, and stronger lean. Do not feature percentages or imply scientific probability or precision.
+- Render all 16 records through one shared result-page structure rather than type-specific pages.
 - Treat every name and description as editable content data rather than branching presentation code.
 - Include changeable habits using neutral language and explain that people with the same code may behave differently.
+- Provide an accessible, expandable "How was my result calculated?" section. It identifies the questions contributing to each dimension, response-value and reverse-scoring rules, dimension totals, letter selection, anchor tie handling, and why a balanced total can still receive a letter.
+- Use the actual deterministic assessment output throughout the result; do not manufacture or separately edit result values.
+- End with a clear action to continue to the separate Personalized Learning Recommendations screen.
+
+### Personalized Learning Recommendations — Approved
+
+- Present recommendations on a dedicated screen after Personality Results, not inside the result page.
 - Recommend lessons from actual dimension thresholds or meaningful answer patterns, not from the personality code alone.
 - For every recommendation, show a brief explanation identifying the relevant response tendency without claiming a knowledge deficit.
+- Show two or three recommended Academy lessons, a short preview of each lesson, and a clear action to enter a recommendation.
 - Resolve multiple matches with a documented priority rule and show no more than three recommendations.
 - If no specific rule matches, provide a neutral default recommendation.
-- Always provide access to the complete Academy.
+- Always provide an option to browse the complete Academy.
 - Recommendation boundary values and fallback behavior must have automated tests.
+
+The Phase 2 rules recommend First Paycheck when S/E or P/F has an absolute total of at least `3`; Retirement Accounts when A/I or C/O has an absolute total of at least `3`; and Compound Growth when S/E or P/F leans at least `3` toward its first pole or C/O leans at least `3` toward exploration. If fewer than two rules match, deterministic neutral defaults fill the list to two. The interface shows two or three recommendations and each reason names the relevant response tendencies.
 
 ### Moneywise Academy — Approved
 
@@ -187,6 +202,8 @@ Financial content must distinguish workplace plans from IRAs and traditional fro
 - Allow zero contribution and boundary inputs without errors or misleading output.
 - End with a reflection that describes trade-offs without prescribing a personally correct contribution.
 
+The implemented fictional scenario uses `$3,000` monthly gross pay, `$450` illustrative withholding, a `$150` benefits deduction, and a fictional employer match equal to 50% of the employee contribution up to 6% of gross pay. The User changes an employee contribution from 0% through 10%. The fixed withholding is deliberately not recalculated and the result is labeled as an illustration, not a tax calculation or real paycheck estimate.
+
 ### Later launch lessons — Approved, not required for Phase 2
 
 - **Retirement Accounts Explained:** Compare traditional 401(k), Roth 401(k), traditional IRA, and Roth IRA through an approachable interactive matrix or sorting activity. Do not recommend one account as universally best.
@@ -208,6 +225,17 @@ Financial content must distinguish workplace plans from IRAs and traditional fro
 - Motion respects `prefers-reduced-motion` and is never required to understand an outcome.
 - Content remains usable at narrow mobile widths and enlarged text without horizontal page scrolling.
 - Errors and unavailable state explain recovery in text.
+
+## Phase 2 implementation status — November 9, 2026
+
+- The complete MVP route sequence is implemented: Landing → 16-question Assessment → Personality Results → Personalized Learning Recommendations → Academy → First Paycheck lesson → Reflection.
+- All 16 personality codes are reachable through deterministic fixtures. The Results screen reads the scoring engine's contribution records directly, so its question text, selected-answer text, reverse-scoring note, contribution, dimension total, qualitative band, assigned letter, and anchor-tie explanation share one source of truth.
+- Recommendation rules are deterministic pure functions of dimension totals. They return two or three explained lesson suggestions and fall back to the documented neutral defaults when no threshold produces two matches.
+- The Academy exposes three lesson records. Your First Paycheck & Employer Match is available and implemented. Retirement Accounts Explained and The Power of Compound Growth are upcoming and planned for Phase 3; they do not expose a functional lesson action in Phase 2.
+- The First Paycheck calculator implements the fictional assumptions above and has automated examples at 0%, 3%, 6%, and 10%, including the match cap. It does not calculate taxes or a real paycheck.
+- Final automated evidence: `npm.cmd test` passed 7 test files and 107 tests; `npm.cmd run build` passed TypeScript validation and produced the Vite production bundle from 46 transformed modules.
+- Known limitation: assessment answers and the derived result are session-only. Refreshing or directly loading Results or Recommendations clears the active result and shows the documented recovery action. Persistence is deferred.
+- Verification boundary: no completed manual mobile/desktop visual test, physical touch-device test, browser Back/refresh usability test, screenshot comparison, screen-reader session, or participant usability test is recorded. Those checks, content review, and deployment remain outstanding; automated structure checks are not substitutes for them.
 
 ## Architecture
 
@@ -234,7 +262,7 @@ The planned layers are:
 - `domain/assessment`: dimension scoring, deterministic letter classification, and recommendation rules.
 - `domain/academy`: paycheck, match, and compound-growth calculations.
 - `content`: questions, personality records, lessons, and source records.
-- `screens`: route-level landing, assessment, results, Academy, lesson, and reflection views.
+- `screens`: route-level landing, assessment, Personality Results, Personalized Learning Recommendations, Academy, lesson, and reflection views.
 - `components`: reusable interface, assessment, lesson, and chart pieces.
 - `storage`: optional non-sensitive progress adapter.
 - `styles`: global rules and design tokens.
@@ -256,6 +284,8 @@ What information the system keeps, where each piece lives, and how it moves and 
 
 A lesson record contains its ID, title, summary, topic tags, estimated time, ordered sections, activity ID, reflection, source IDs, and factual review date. A source record contains publisher, title, URL, supported claims, access date, and whether it is time-sensitive.
 
+The assessment sources of truth live in `src/content/assessment/`, with pure validation and scoring in `src/domain/assessment/`. The scoring result contains each dimension's question IDs and text, selected answer labels, original values, reverse-scoring multiplier, scored contributions, total, qualitative band and explanation, assigned letter, neutral-response count, limited-response notice, anchor ID, and whether the anchor resolved an exact tie. Personality records are retrieved by the resulting four-letter code. Recommendation and paycheck rules are also pure domain functions; React components do not redefine them.
+
 ### Interaction loop
 
 How User input or other events lead to changes in state and then to what the User sees, hears, or receives.
@@ -266,8 +296,9 @@ User answers a question
 → after valid submission, pure scoring calculates four response scores
 → sign and documented anchor tiebreaks select four letters
 → the code selects one personality content record
+→ Personality Results renders trait scales, explanations, and calculation details
+→ User continues to the separate learning-path screen
 → recommendation rules select and explain lesson suggestions
-→ results render chart plus text
 → User opens any lesson
 → fictional inputs change
 → pure lesson calculation returns new outputs
@@ -317,4 +348,7 @@ Consequential structural decisions, the alternatives considered, and why you cho
 - **November 2, 2026 — Source-linked content:** Chose structured source records and review dates because financial rules can change and factual maintenance must not depend on searching interface components.
 - **November 2, 2026 — Runtime AI excluded:** Chose predefined reviewed content over generated explanations to protect accuracy, privacy, reliability, and scope. AI-assisted development decisions will be documented separately.
 - **November 2, 2026 — Sixteen-type classification:** Replaced four nearest prototypes with four binary score classifications and an internally identified anchor tiebreak for each axis. This makes every code explainable but increases content and test coverage.
-- **Outstanding:** Review profile wording, question usability, the provisional limited-response and near-balance conventions, recommendation thresholds, test library, route library, replacement or refinement of the provisional logo, typography, and design tokens before they become implementation rules.
+- **November 9, 2026 — Explainable scoring payload:** Implemented assessment validation and scoring as pure TypeScript. Results retain raw responses and every scored contribution so the later Results screen can explain the calculation without recalculating or inventing values. Profile content remains separate from the scorer and React.
+- **November 9, 2026 — Mixed assessment formats:** Replaced the all-agreement assessment with eight agreement questions and eight approved scenarios. Scenario options map directly to signed contributions; only agreement Q1 items are reverse-scored. This preserves the `-8` to `+8` totals, all 16 codes, qualitative bands, and anchor tie rule while allowing User-facing answers to be conversational.
+- **November 9, 2026 — Session-only MVP state:** Assessment answers and the derived result remain in React session memory. A refreshed result URL shows a recovery action instead of manufacturing or persisting a result. Local storage remains deferred.
+- **Outstanding:** Usability-review the implemented question, profile, limited-response, near-balance, recommendation, and financial-explanation language; review the already documented recommendation thresholds after User testing; and review replacement or refinement of the provisional logo, typography, and design tokens before those presentation choices become final.
